@@ -45,7 +45,7 @@
     "mostly-minimal-spanning-tree": "^1.0.2",
     "nanocustomassert": "^1.0.0",
     "nanoerror": "^1.1.0",
-    "pump": "^3.0.0",
+    "plump": "github:ducksandgoats/plump",
     "socket-signal-websocket": "^9.1.0"
   },
   "devDependencies": {

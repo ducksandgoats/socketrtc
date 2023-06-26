@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import crypto from 'crypto';
 import assert from 'nanocustomassert';
-import pump from 'pump';
+import pump from 'plump';
 import MMSTSignalClient from './lib/mmst-signal-client';
 import { toHex, callbackPromise, resolveCallback } from './lib/utils.js';
 import * as errors from './lib/errors';
