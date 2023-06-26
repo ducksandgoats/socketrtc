@@ -4,9 +4,9 @@ import assert from 'nanocustomassert';
 import pump from 'plump';
 import MMSTSignalClient from './lib/mmst-signal-client';
 import { toHex, callbackPromise, resolveCallback } from './lib/utils.js';
-import * as errors from './lib/errors';
+import * as useErrors from './lib/errors';
 
-const { ERR_CONNECTION_DUPLICATED } = errors
+const { ERR_CONNECTION_DUPLICATED } = useErrors
 
 const assertChannel = channel => assert(Buffer.isBuffer(channel) && channel.length === 32, 'Channel must be a buffer of 32 bytes')
 
@@ -219,5 +219,5 @@ class DiscoverySwarmWebrtc extends EventEmitter {
   }
 }
 
-module.exports.RTC = DiscoverySwarmWebrtc
-module.exports.errors = errors
+export const RTC = DiscoverySwarmWebrtc
+export const errors = useErrors
