@@ -111,10 +111,10 @@ class DiscoverySwarmWebrtc extends EventEmitter {
 
     this.on('error', (args) => {console.error(args)})
 
-    signal.on('peer-error', err => this.emit('error', err))
-    signal.on('error', err => this.emit('error', err))
-    signal.open().catch(err => process.nextTick(() => this.emit('error', err)))
-    signal.on('candidates-updated', (...args) => this.emit('candidates-updated', ...args))
+    signal.on('peer-error', (err) => {this.emit('error', err)})
+    signal.on('error', (err) => {this.emit('error', err)})
+    signal.open().catch((err) => {this.emit('error', err)})
+    signal.on('candidates-updated', (args) => {this.emit('candidates-updated', args)})
   }
 
   _createConnection (peer) {
