@@ -219,5 +219,5 @@ class DiscoverySwarmWebrtc extends EventEmitter {
   }
 }
 
-module.exports = (...args) => new DiscoverySwarmWebrtc(...args)
+module.exports.RTC = DiscoverySwarmWebrtc
 module.exports.errors = errors
