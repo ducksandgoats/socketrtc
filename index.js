@@ -1,13 +1,10 @@
-const { EventEmitter } = require('events')
-const crypto = require('crypto')
-const assert = require('nanocustomassert')
-
-const pump = require('pump')
-
-const log = require('debug')('discovery-swarm-webrtc')
-const MMSTSignalClient = require('./lib/mmst-signal-client')
-const { toHex, callbackPromise, resolveCallback } = require('./lib/utils')
-const errors = require('./lib/errors')
+import { EventEmitter } from 'events';
+import crypto from 'crypto';
+import assert from 'nanocustomassert';
+import pump from 'pump';
+import MMSTSignalClient from './lib/mmst-signal-client';
+import { toHex, callbackPromise, resolveCallback } from './lib/utils.js';
+import * as errors from './lib/errors';
 
 const { ERR_CONNECTION_DUPLICATED } = errors
 
@@ -16,7 +13,6 @@ const assertChannel = channel => assert(Buffer.isBuffer(channel) && channel.leng
 class DiscoverySwarmWebrtc extends EventEmitter {
   constructor (opts = {}) {
     super()
-    log('opts', opts)
 
     const { id = crypto.randomBytes(32), bootstrap, stream, simplePeer, maxPeers = 5, timeout = 15 * 1000, signal, mmst = {} } = opts
 
@@ -111,8 +107,7 @@ class DiscoverySwarmWebrtc extends EventEmitter {
   _initialize () {
     const signal = this.signal
 
-    // It would log the errors and prevent of throw it.
-    this.on('error', (...args) => log('error', ...args))
+    this.on('error', (args) => {console.error(args)})
 
     signal.on('peer-error', err => this.emit('error', err))
     signal.on('error', err => this.emit('error', err))
@@ -136,8 +131,6 @@ class DiscoverySwarmWebrtc extends EventEmitter {
       channel: toHex(peer.topic),
       initiator: peer.initiator
     })
-
-    log('createConnection', { info: peer.printInfo() })
 
     try {
       const duplicate = this._checkForDuplicate(peer)
@@ -164,12 +157,10 @@ class DiscoverySwarmWebrtc extends EventEmitter {
     const info = peer.getInfo()
 
     peer.on('error', err => {
-      log('error', err)
       this.emit('connection-error', err, info)
     })
 
     peer.on('connect', () => {
-      log('connect', { peer })
       if (peer.stream.destroyed) {
         return
       }
@@ -191,7 +182,6 @@ class DiscoverySwarmWebrtc extends EventEmitter {
     })
 
     peer.on('close', () => {
-      log('close', { peer })
       this.emit('connection-closed', peer.stream, info)
     })
   }

@@ -1,5 +1,5 @@
 {
-  "name": "@geut/discovery-swarm-webrtc",
+  "name": "socketrtc",
   "version": "4.3.1",
   "description": "discovery-swarm for WebRTC.",
   "main": "index.js",
