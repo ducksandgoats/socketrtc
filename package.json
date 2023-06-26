@@ -39,6 +39,7 @@
   },
   "homepage": "https://github.com/geut/discovery-swarm-webrtc#readme",
   "dependencies": {
+    "buffer": "^6.0.3",
     "debug": "^4.1.1",
     "end-of-stream": "^1.4.4",
     "minimist": "^1.2.0",
@@ -46,6 +47,7 @@
     "nanocustomassert": "^1.0.0",
     "nanoerror": "^1.1.0",
     "plump": "github:ducksandgoats/plump",
+    "randombytes": "github:bneijt/randombytes#patch-1",
     "socket-signal-websocket": "^9.1.0"
   },
   "devDependencies": {

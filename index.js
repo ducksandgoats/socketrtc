@@ -1,7 +1,9 @@
 import { EventEmitter } from 'events';
-import crypto from 'crypto';
+// import crypto from 'crypto';
+import randomBytes from 'randombytes';
 import assert from 'nanocustomassert';
 import pump from 'plump';
+import { Buffer } from 'buffer';
 import MMSTSignalClient from './lib/mmst-signal-client';
 import { toHex, callbackPromise, resolveCallback } from './lib/utils.js';
 import * as useErrors from './lib/errors';
@@ -14,7 +16,7 @@ class DiscoverySwarmWebrtc extends EventEmitter {
   constructor (opts = {}) {
     super()
 
-    const { id = crypto.randomBytes(32), bootstrap, stream, simplePeer, maxPeers = 5, timeout = 15 * 1000, signal, mmst = {} } = opts
+    const { id = randomBytes(32), bootstrap, stream, simplePeer, maxPeers = 5, timeout = 15 * 1000, signal, mmst = {} } = opts
 
     assert(Array.isArray(bootstrap) && bootstrap.length > 0, 'The `bootstrap` options is required.')
     assert(Buffer.isBuffer(id) && id.length === 32, 'The `id` option needs to be a Buffer of 32 bytes.')
